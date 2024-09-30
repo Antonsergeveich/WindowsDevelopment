@@ -1,6 +1,9 @@
 ﻿#include<Windows.h>
 #include"resource.h"
 
+CONST CHAR g_sz_LOGIN_INVITATION[] = "Введите имя пользователя";
+
+// Процедура окна:
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdSHow)
@@ -33,7 +36,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	// LNK1120 1 unresolved external: Project -> Properties -> Linker -> System -> SubSystem -> Windows (/SUBSYSTEM:WINDOWS)
 	//Модальным называется окно которое блокирует родительское окно
 
-	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), 0, (DLGPROC)DlgProc, 0);
+	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), 0, (DLGPROC)DlgProc, 0); //преобразование(DLGPROC) - для того чтобы не подчёркивало DlgProc, либо X86.
 
 	return 0;
 }
@@ -46,16 +49,39 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	switch (uMsg)
 	{
-	case WM_INITDIALOG: //Это сообщение отправляется один раз при инициализации окна
+	case WM_INITDIALOG:
+	{
+		//Это сообщение отправляется один раз при инициализации окна
+		HWND hEdit = GetDlgItem(hwnd, IDC_EDIT_LOGIN);
+		SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)g_sz_LOGIN_INVITATION);
+	}
 		break;
 	case WM_COMMAND:    //Обрабатывает нажатие кнопок и другие действия пользователя
 		//ResourseID - самое обычное число типа INT
 		switch (LOWORD(wParam))
 		{
+		case IDC_EDIT_LOGIN:
+		{
+			CONST INT SIZE = 256;
+			CHAR sz_buffer[SIZE]{};
+			SendMessage((HWND)lParam, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
+			if (HIWORD(wParam) == EN_SETFOCUS)
+			{
+				if (strcmp(sz_buffer, g_sz_LOGIN_INVITATION) == 0)
+					SendMessage((HWND)lParam, WM_SETTEXT, 0, (LPARAM)"");
+			}
+			if (HIWORD(wParam) == EN_KILLFOCUS)
+			{
+				if (strcmp(sz_buffer, "") == 0)
+					SendMessage((HWND)lParam, WM_SETTEXT, 0, (LPARAM)g_sz_LOGIN_INVITATION);
+			}
+			//EN_ - Edit Notofication
+		}
+		break;
 		case IDC_BUTTON_COPY:
 		{
 			CONST INT SIZE = 256;
-			CHAR sz_buffer[SIZE] = {}; 
+			CHAR sz_buffer[SIZE] = {};
 			//sz - String Zero (NULL Terminated Line - C -string)
 			HWND hEditLogin = GetDlgItem(hwnd, IDC_EDIT_LOGIN);
 			HWND hEditPassword = GetDlgItem(hwnd, IDC_EDIT_PASSWORD);
