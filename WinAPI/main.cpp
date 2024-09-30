@@ -30,9 +30,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	//https://learn.microsoft.com/ru-ru/dotnet/api/system.windows.forms.messagebox?view=windowsdesktop-6.0
 	//MessegeBox: MB_ICONWARNING , MB_ICONERROR, MB_ICONINFORMATION
 	//wchar_t progect->propertis->Advanced->Character Set->Use Multi-Byte Character Set
+	// LNK1120 1 unresolved external: Project -> Properties -> Linker -> System -> SubSystem -> Windows (/SUBSYSTEM:WINDOWS)
 	//Модальным называется окно которое блокирует родительское окно
 
-	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), 0, DlgProc, 0);
+	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), 0, (DLGPROC)DlgProc, 0);
 
 	return 0;
 }
