@@ -94,7 +94,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_CLOSE:      //Отправляется при нажатии кнопки закрыть 'X'
-		EndDialog(hwnd, 0);
+		EndDialog(hwnd, 0); //Для того чтобы окно закрывалось крестиком
 		//C:\Users\Pro>taskkill /f /im WinAPI.exe (закрыть окно через консоль)
 		break;
 	}
