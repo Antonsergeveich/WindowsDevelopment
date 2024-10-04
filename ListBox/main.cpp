@@ -80,7 +80,6 @@ BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			else
 				MessageBox(hwnd, "Такое вхождение уже существует", "Info", MB_OK | MB_ICONINFORMATION);
 		}
-		
 		case IDCANCEL:
 			EndDialog(hwnd, 0);
 		}
