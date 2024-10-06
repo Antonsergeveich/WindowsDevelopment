@@ -28,7 +28,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hCombo, CB_ADDSTRING, 0, (LPARAM)g_COMBO_BOX_ITEMS[i]);// Обращаемся к окну
 		}
 		SendMessage(hCombo, CB_SETCURSEL, 0, 0);
-		//CB_SETCURSEL - ComboBox Set Current Selection
+		//CB_SETCURSEL - ComboBox Set Current Selection (Установить текущий выбор)
 	}
 	break;
 	case WM_COMMAND: // Обрабатываем кнопки
