@@ -1,4 +1,4 @@
-#include<Windows.h>
+п»ї#include<Windows.h>
 #include<cstdio>
 #include"resource.h"
 
@@ -44,7 +44,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hCombo, LB_GETTEXT, i, (LPARAM)sz_buffer);
 
 			if (i != LB_ERR)
-				sprintf(sz_message, "Вы выбрали №%i со значением %s", i, sz_buffer);
+				sprintf(sz_message, "Р’С‹ РІС‹Р±СЂР°Р»Рё в„–%i СЃРѕ Р·РЅР°С‡РµРЅРёРµРј %s", i, sz_buffer);
 
 			MessageBox(hwnd, sz_message, "Info", MB_OK | MB_ICONINFORMATION);
 		}
@@ -73,12 +73,12 @@ BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CONST INT SIZE = 256;
 			CHAR sz_buffer[SIZE]{};
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT_NAME), WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			HWND hParent = GetParent(hwnd); //получаем родительское окно
+			HWND hParent = GetParent(hwnd); //РїРѕР»СѓС‡Р°РµРј СЂРѕРґРёС‚РµР»СЊСЃРєРѕРµ РѕРєРЅРѕ
 			HWND hListBox = GetDlgItem(hParent, IDC_LIST1);
 			if (SendMessage(hListBox, LB_FINDSTRING, -1, (LPARAM)sz_buffer) == LB_ERR)
 				SendMessage(hListBox, LB_ADDSTRING, 0, (LPARAM)sz_buffer);
 			else
-				MessageBox(hwnd, "Такое вхождение уже существует", "Info", MB_OK | MB_ICONINFORMATION);
+				MessageBox(hwnd, "РўР°РєРѕРµ РІС…РѕР¶РґРµРЅРёРµ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚", "Info", MB_OK | MB_ICONINFORMATION);
 		}
 		case IDCANCEL:
 			EndDialog(hwnd, 0);
