@@ -6,7 +6,6 @@ CONST CHAR* g_LIST_BOX_ITEMS[] = { "This", "is", "my", "first", "List", "Box" };
 
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-BOOL CALLBACK DlgProcDelete(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DlgProcChange(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR LpCmdLine, INT nCmdShow)
@@ -47,6 +46,15 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case IDC_BUTTON_ADD:
 			DialogBoxParam(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG_ADD_ITEM), hwnd, (DLGPROC)DlgProcAdd, 0);
 			break;
+		case IDC_BUTTON_DELETE:
+		{
+			CONST INT SIZE = 256;
+			CHAR sz_buffer[SIZE];
+			HWND hList = GetDlgItem(hwnd, IDC_LIST1);
+			INT i = SendMessage(hList, LB_GETCURSEL, 0, 0);
+			SendMessage(hList, LB_DELETESTRING, i, 0);
+		}
+			break;
 		case IDOK:
 		{
 			CONST INT SIZE = 256;
@@ -58,7 +66,6 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			if (i != LB_ERR)
 				sprintf(sz_message, "Вы выбрали №%i со значением %s", i, sz_buffer);
-
 			MessageBox(hwnd, sz_message, "Info", MB_OK | MB_ICONINFORMATION);
 		}
 		break;
@@ -102,32 +109,7 @@ BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return FALSE;
 }
-BOOL DlgProcDelete(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	switch (uMsg)
-	{
-	case WM_INITDIALOG:
-		break;
-	case WM_COMMAND:
-		switch (LOWORD(wParam))
-		{
-		case IDC_BUTTON_DELETE:
-			
 
-			break;
-		case IDOK:
-		{
-				MessageBox(hwnd, NULL, "Info", MB_OK | MB_ICONINFORMATION);
-		}
-		case IDCANCEL:
-			EndDialog(hwnd, 0);
-		}
-		break;
-	case WM_CLOSE:
-		EndDialog(hwnd, 0);
-	}
-	return FALSE;
-}
 BOOL CALLBACK DlgProcChange(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
