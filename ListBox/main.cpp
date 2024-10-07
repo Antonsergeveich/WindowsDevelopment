@@ -95,9 +95,11 @@ BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT_NAME), WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
 			HWND hParent = GetParent(hwnd); //получаем родительское окно
 			HWND hListBox = GetDlgItem(hParent, IDC_LIST1);
-			if (SendMessage(hListBox, LB_FINDSTRING, -1, (LPARAM)sz_buffer) == LB_ERR)
+			if (strcmp(sz_buffer, "") == LB_OKAY)
+				MessageBox(hwnd, "Такое вхождение нельзя добавить", "Info", MB_OK | MB_ICONINFORMATION);
+			else if (SendMessage(hListBox, LB_FINDSTRING, -1, (LPARAM)sz_buffer) == LB_ERR)
 				SendMessage(hListBox, LB_ADDSTRING, 0, (LPARAM)sz_buffer);
-			else
+			else if (SendMessage(hListBox, LB_FINDSTRING, -1, (LPARAM)sz_buffer) != LB_ERR)
 				MessageBox(hwnd, "Такое вхождение уже существует", "Info", MB_OK | MB_ICONINFORMATION);
 		}
 		case IDCANCEL:
