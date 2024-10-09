@@ -57,9 +57,9 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		NULL, //Window ExStyle
 		g_sz_WINDOW_CLASS, //Window Class Name
 		g_sz_WINDOW_CLASS, // Window Title
-		WS_OVERLAPPEDWINDOW, //Window Style
+		WS_OVERLAPPED | WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, //Window Style
 		CW_USEDEFAULT, CW_USEDEFAULT, // Coordinates
-		CW_USEDEFAULT, CW_USEDEFAULT,  // Window size
+		CW_USEDEFAULT, CW_USEDEFAULT, // Window size
 		NULL, //Parent
 		NULL, //hMenu: Для главного окна это ResourceID главного меню,
 		//для дочернего окна (кнопки и другие элементы)
