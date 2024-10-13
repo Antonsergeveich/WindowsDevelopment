@@ -117,21 +117,23 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		CreateWindowEx(
 			NULL, "Button", "Применить",
 			WS_CHILD | WS_VISIBLE,
-			200, 55, 
+			200, 55,
 			100, 32,
 			hwnd,
 			(HMENU)IDC_BUTTON,
 			GetModuleHandle(NULL),
 			NULL
 		);
-			break;
+		break;
 	case WM_SIZE:
 	case WM_MOVE:
 	{
-		RECT rect;
-		GetWindowRect(hwnd, &rect);
+		RECT rect; //Объявляем прямоугольник
+		//https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect
+		GetWindowRect(hwnd, &rect); // Берём размер окна 
 		CONST INT SIZE = 256;
 		CHAR buffer[SIZE]{};
+		//https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/reference/sprintf-sprintf-l-swprintf-swprintf-l-swprintf-l?view=msvc-170
 		sprintf
 		(
 			buffer, "%s   Position: %i x %i, Size: %i x %i",
@@ -141,6 +143,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		);
 		SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)buffer);
 	}
+	//https://learn.microsoft.com/ru-ru/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions?view=msvc-170
 	break;
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
@@ -156,7 +159,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hStatic, WM_SETTEXT, 0, (LPARAM)sz_buffer);
 			SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)sz_buffer);
 		}
-			break;
+		break;
 		}
 		break;
 	case WM_DESTROY:
