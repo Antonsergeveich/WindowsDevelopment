@@ -1,5 +1,6 @@
 #include<Windows.h>
-#include"Calc.h"
+#include"resource.h"
+#include<cstdio>
 
 CONST CHAR g_sz_WINDOW_CLASS[] = "Calc";
 
@@ -23,11 +24,6 @@ BOOL CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
 	{
-	case WM_INITDIALOG:
-	{
-		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(CALC_ICON));
-		SendMessage(hwnd, WM_SETICON, 0, (LPARAM)hIcon);
-	}
 	case WM_CREATE:
 	{
 		HWND hEditDisplay = CreateWindowEx
@@ -189,11 +185,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	wClass.cbSize = sizeof(wClass);
 	wClass.cbWndExtra = 0;
 	wClass.cbClsExtra = 0;
-
+	
 	//wClass.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
 	wClass.hIcon = (HICON)LoadImage(hInstance, "ICO\\calc.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
-	//wClass.hIconSm = LoadIcon(hInstance, IDI_APPLICATION);
-	wClass.hIconSm = (HICON)LoadImage(hInstance, "ICO\\calc.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
+	wClass.hIconSm = LoadIcon(hInstance, IDI_APPLICATION);
 	wClass.hCursor = LoadCursor(hInstance, IDC_ARROW);
 	wClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
 

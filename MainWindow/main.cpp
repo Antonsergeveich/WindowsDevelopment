@@ -1,4 +1,6 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<Windows.h>
+#include<string>
 
 #define IDC_STATIC  1000 //1) Создаём ResourceID для дочернего элемента
 #define IDC_EDIT    1001
@@ -56,7 +58,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	(
 		NULL, //Window ExStyle
 		g_sz_WINDOW_CLASS, //Window Class Name
-		g_sz_WINDOW_CLASS, // Window Title
+		g_sz_WINDOW_CLASS,  // Window Title
 		WS_OVERLAPPED | WS_THICKFRAME | WS_SYSMENU | WS_MINIMIZEBOX | WS_MAXIMIZEBOX, //Window Style
 		CW_USEDEFAULT, CW_USEDEFAULT, // Coordinates
 		CW_USEDEFAULT, CW_USEDEFAULT, // Window size
@@ -123,6 +125,23 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL
 		);
 			break;
+	case WM_SIZE:
+	case WM_MOVE:
+	{
+		RECT rect;
+		GetWindowRect(hwnd, &rect);
+		CONST INT SIZE = 256;
+		CHAR buffer[SIZE]{};
+		sprintf
+		(
+			buffer, "%s   Position: %i x %i, Size: %i x %i",
+			g_sz_WINDOW_CLASS,
+			rect.left, rect.top,
+			rect.right - rect.left, rect.bottom - rect.top
+		);
+		SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)buffer);
+	}
+	break;
 	case WM_COMMAND:
 		switch (LOWORD(wParam))
 		{
