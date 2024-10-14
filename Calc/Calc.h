@@ -2,7 +2,9 @@
 // Microsoft Visual C++ generated include file.
 // Used by Calc.rc
 
-#define CALC_ICON                       800
+#define IDI_ICON1                       103
+//#define CALC_ICON                       800
+
 #define IDC_EDIT_DISPLAY                900
 #define IDC_BUTTON_0                    1000
 #define IDC_BUTTON_1                    1001

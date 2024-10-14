@@ -33,5 +33,8 @@
     <Image Include="ICO\calc.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ICO\accessoriescalculator.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

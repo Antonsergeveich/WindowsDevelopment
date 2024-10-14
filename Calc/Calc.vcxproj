@@ -136,6 +136,7 @@
     <ResourceCompile Include="Calc.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="ICO\accessoriescalculator.ico" />
     <Image Include="ICO\calc.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
